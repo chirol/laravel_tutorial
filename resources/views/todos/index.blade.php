@@ -10,7 +10,7 @@
     <div class="panel-heading">タスク</div>
     <div class="panel-body">
         <div class="text-right">
-        <a href="#" class="btn btn-default btn-block">
+        <a href="{{ route('create') }}" class="btn btn-default btn-block">
             タスクを追加する
         </a>
         </div>
@@ -31,7 +31,7 @@
             <td>
                 <span class="label {{ $todo->Doneflag_class }}">{{ $todo->doneflag_label }}</span>
             </td>
-            <td>{{ $todo->due_date->format('Y/m/d') }}</td>
+            <td>{{ $todo->due_date->format('Y/m/d') }}</td> <!--formatが冗長かも-->
             <td><a href="#">編集</a></td>
             </tr>
         @endforeach

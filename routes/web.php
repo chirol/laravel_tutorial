@@ -12,3 +12,7 @@
 */
 
 Route::get('/', 'TaskController@index')->name('index');
+Route::get('/create', 'TaskController@showCreateForm')->name('create');
+Route::post('/create', 'TaskController@create');
+Route::get('/{id}/edit', 'TaskController@showEditForm')->name('edit');
+Route::post('/{id}/edit', 'TaskController@edit');
