@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\todo;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateTask;
+use App\Http\Requests\EditTask;
 
-    /**
+/**
      * タスクのコントローラー
      */
 class TaskController extends Controller
@@ -33,7 +34,7 @@ class TaskController extends Controller
     }
 
     /**
-     * フォームから受け取った情報をもとにデータベースに書き込む
+     * フォームから受け取った情報をもとにデータベースに書き込む（タスク作成機能）
      */
     public function create(CreateTask $request){
 
@@ -63,6 +64,22 @@ class TaskController extends Controller
         return view('todos/edit', [
             'todo' => $todo,
         ]);
+    }
+
+    /**
+     * フォームから受け取った情報をもとにデータベースに書き込む（タスク編集機能）
+     */
+    public function edit(int $id, EditTask $request)
+    {
+        $todo = todo::find($id);
+
+        $todo->title = $request->title;
+        $todo->body = $request->body;
+        $todo->due_date = $request->due_date;
+        $todo->done_flag = $request->done_flag;
+        $todo->save();
+
+        return redirect()->route('index');
     }
 
 }

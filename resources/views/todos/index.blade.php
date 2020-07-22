@@ -32,7 +32,7 @@
                 <span class="label {{ $todo->Doneflag_class }}">{{ $todo->doneflag_label }}</span>
             </td>
             <td>{{ $todo->due_date->format('Y/m/d') }}</td> <!--formatが冗長かも-->
-            <td><a href="#">編集</a></td>
+            <td><a href="{{ route('edit', ['id' => $todo->id]) }}">編集</a></td>
             </tr>
         @endforeach
         </tbody>

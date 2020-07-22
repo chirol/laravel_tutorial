@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -23,22 +24,36 @@
                         @endforeach
                     </div>
                 @endif
-<!-- methodにPOSTを指定しているので、name('create')と紐付けられた複数のURLのうち、POSTで始まるものが適応される -->
-              <form action="{{ route('edit'), ['id' => $id] }}" method="post">
+<!-- methodにPOSTを指定しているので、name('edit')と紐付けられた複数のURLのうち、POSTで始まるものが適応される -->
+              <form action="{{ route('edit', ['id' => $todo->id])}}" method="post">
                 @csrf
                 <div class="form-group">
                   <label for="title">タスク名</label>
                   <input type="text" class="form-control" name="title" id="title" value="{{ old('title') ?? $todo->title }}" />
                 </div>
+                <div class="form-group">
+                  <label for="done_flag">実施状態</label>
+                  <select name="done_flag" id="done_flag" class="form-control">
+                    @foreach(\App\todo::DONE_FLAG as $key => $val)
+                    // oldに値があったらそれを選択済みにする
+                      <option
+                        value="{{ $key }}"
+                        {{ $key == old('done_flag', $todo->done_flag) ? 'selected' : '' }}
+                      >
+                      {{ $val['label'] }}
+                      </option>
+                    @endforeach
+                  </select>
+                </div>
 
                 <div class="form-group">
                     <label for="body">タスクの内容</label>
-                    <input type="text" class="form-control" name="body" id="body" value="{{ old('body') }}" />
+                    <input type="text" class="form-control" name="body" id="body" value="{{ old('body') ?? $todo->body }}" />
                 </div>
 
                 <div class="form-group">
                     <label for="due_date">期限日</label>
-                    <input type="text" class="form-control" name="due_date" id="due_date" value="{{ old('due_date') }}" />
+                    <input type="text" class="form-control" name="due_date" id="due_date" value="{{ old('due_date') ?? $todo->due_date }}" />
                 </div>
 
                 <div class="text-right">
