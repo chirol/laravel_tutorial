@@ -82,4 +82,15 @@ class TaskController extends Controller
         return redirect()->route('index');
     }
 
+    /**
+     * Todoの削除機能
+     */
+    public function destroy(int $id)
+    {
+        $todo = todo::find($id);
+
+        $todo->delete();
+
+        return redirect()->route('index');
+    }
 }

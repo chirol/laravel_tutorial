@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+@extends('layout')
+@section('content')
+<div class="container">
     <div class="panel panel-default">
     <div class="panel-heading">タスク</div>
     <div class="panel-body">
@@ -33,11 +28,12 @@
             </td>
             <td>{{ $todo->due_date->format('Y/m/d') }}</td> <!--formatが冗長かも-->
             <td><a href="{{ route('edit', ['id' => $todo->id]) }}">編集</a></td>
+            <td><a href="{{ route('delete', ['id' => $todo->id]) }}">削除 </a></td>           
             </tr>
         @endforeach
         </tbody>
     </table>
     </div>
+</div>
     
-</body>
-</html>
+@endsection
