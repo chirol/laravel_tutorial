@@ -93,4 +93,14 @@ class TaskController extends Controller
 
         return redirect()->route('index');
     }
+
+    /**
+     * Todoの詳細表示機能
+     */
+    public function show(int $id)
+    {
+        $todo = todo::find($id);
+
+        return view('todos/show', ['todo' => $todo]);
+    }
 }
