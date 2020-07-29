@@ -16,7 +16,8 @@ class TaskController extends Controller
      * タスクの一覧表示
      * 
      */
-    public function index(){
+    public function index()
+    {
 
         $todos = todo::all();
 
@@ -31,6 +32,18 @@ class TaskController extends Controller
     public function showCreateForm(){
 
         return view('todos/create');
+    }
+
+    /**
+     * 一覧表示画面での検索機能
+     */
+    public function search()
+    {
+        $todos = todo::all();
+
+        return view('todos/index',[
+            'todos' => $todos
+        ]);
     }
 
     /**

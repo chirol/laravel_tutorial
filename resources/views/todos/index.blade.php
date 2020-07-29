@@ -38,6 +38,12 @@
             </td>
             </tr>
         @endforeach
+            <tr>
+                {{ Form::open(['action' => 'TaskController@search'], ['method' => 'post']) }}
+                {{ Form::text('search_due_date', '期限日検索', ["id" => "search_due_date"])}}
+                {{ Form::submit('検索')}}
+                {{ Form::close() }}
+            </tr>
         </tbody>
     </table>
     </div>
