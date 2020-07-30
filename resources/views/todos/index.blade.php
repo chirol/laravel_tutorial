@@ -1,4 +1,10 @@
 @extends('layout')
+
+@section('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="panel panel-default">
@@ -49,4 +55,15 @@
     </div>
 </div>
     
+@endsection
+
+@section('scripts')
+  <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+  <script src="https://npmcdn.com/flatpickr/dist/l10n/ja.js"></script>
+  <script>
+    flatpickr(document.getElementById('search_due_date'), {
+      locale: 'ja',
+      dateFormat: "Y-m-d",
+    });
+</script>
 @endsection

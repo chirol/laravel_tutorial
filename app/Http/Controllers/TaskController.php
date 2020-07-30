@@ -6,6 +6,7 @@ use App\todo;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateTask;
 use App\Http\Requests\EditTask;
+use App\Http\Requests\SearchTask;
 
 /**
      * タスクのコントローラー
@@ -19,7 +20,7 @@ class TaskController extends Controller
     public function index()
     {
 
-        $todos = todo::all();
+        $todos = todo::orderBy('due_date', 'DESC')->get();
 
         return view('todos/index', [
             'todos' => $todos
@@ -37,9 +38,11 @@ class TaskController extends Controller
     /**
      * 一覧表示画面での検索機能
      */
-    public function search()
+    public function search(SearchTask $request)
     {
-        $todos = todo::all();
+        $search_due_date = $request->search_due_date;
+        $todos = todo::where('due_date', '<=', $request->search_due_date)->orderBy('due_date', 'DESC')->get();
+
 
         return view('todos/index',[
             'todos' => $todos
