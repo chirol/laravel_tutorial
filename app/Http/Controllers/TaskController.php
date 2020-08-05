@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\todo;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateTask;
 use App\Http\Requests\EditTask;
 use App\Http\Requests\SearchTask;
+use Illuminate\Support\Facades\Auth;
 
 /**
      * タスクのコントローラー
@@ -62,6 +64,7 @@ class TaskController extends Controller
         $todo->body  = $request->body;
         $todo->due_date = $request->due_date;
 
+        Auth::user()->todos()->save($todo);
         // インスタンスの状態をデータベースに保存
         $todo->save();
 
@@ -113,8 +116,9 @@ class TaskController extends Controller
     /**
      * Todoの詳細表示機能
      */
-    public function show(int $id)
+    public function show(Request $request)
     {
+        dd($request->id);
         $todo = todo::find($id);
 
         return view('todos/show', ['todo' => $todo]);

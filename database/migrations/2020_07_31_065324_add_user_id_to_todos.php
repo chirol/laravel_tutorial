@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnTodo extends Migration
+class AddUserIdToTodos extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,9 @@ class AddColumnTodo extends Migration
     public function up()
     {
         Schema::table('todos', function (Blueprint $table) {
-            //
+            //$table->integer('user_id')->unsigned();
+            //外部キーの設定
+            //$table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -26,6 +28,7 @@ class AddColumnTodo extends Migration
     public function down()
     {
         Schema::table('todos', function (Blueprint $table) {
+            //$table->dropColumn('user_id');
             //
         });
     }

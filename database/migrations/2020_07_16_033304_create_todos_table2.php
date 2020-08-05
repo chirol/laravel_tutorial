@@ -13,16 +13,10 @@ class CreateTodosTable2 extends Migration
      */
     public function up()
     {
-        Schema::create('todos', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('title', 20);
-            $table->string('body', 100)->nullable();
-            $table->datetime('due_date');
-            $table->integer('done_flag')->default(1);
-            $table->timestamps();
+        Schema::table('todos', function (Blueprint $table) {
+            //
         });
     }
-
     /**
      * Reverse the migrations.
      *

@@ -37,4 +37,13 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * リダイレクト先をルートに変更
+     */
+    public function redirectPath()
+    {
+        session()->flash('flash_message', 'ログインしました');
+        return '/';
+    }
 }

@@ -10,6 +10,18 @@
     <div class="panel panel-default">
     <div class="panel-heading">タスク</div>
     <div class="panel-body">
+        @if(session('flash_message'))
+            <div class="flash_message bg-success text-center py-3 my-0">
+                {{session('flash_message')}}
+            </div>
+        @endif
+        @if($errors->any())
+            <div class="alert alert-danger">
+                @foreach($errors->all() as $message)
+                    <p>{{ $message }}</p>
+                @endforeach
+            </div>
+        @endif
         <div class="text-right">
         <a href="{{ route('create') }}" class="btn btn-default btn-block">
             タスクを追加する
