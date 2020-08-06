@@ -21,8 +21,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-
-        $todos = todo::orderBy('due_date', 'DESC')->get();
+        //ユーザーモデルに紐付いているタスク一覧を取得し、実施状態と期限日でソート
+        $todos = Auth::user()->todos()->orderBy('done_flag', 'DESC')->orderBy('due_date', 'ASC')->get();
 
         return view('todos/index', [
             'todos' => $todos
@@ -43,8 +43,8 @@ class TaskController extends Controller
     public function search(SearchTask $request)
     {
         $search_due_date = $request->search_due_date;
-        $todos = todo::where('due_date', '<=', $request->search_due_date)->orderBy('due_date', 'DESC')->get();
-
+        
+        $todos = Auth::user()->todos()->where('due_date', '<=', $request->search_due_date)->orderBy('done_flag', 'DESC')->orderBy('due_date', 'ASC')->get();
 
         return view('todos/index',[
             'todos' => $todos
@@ -63,6 +63,7 @@ class TaskController extends Controller
         $todo->title = $request->title;
         $todo->body  = $request->body;
         $todo->due_date = $request->due_date;
+
 
         Auth::user()->todos()->save($todo);
         // インスタンスの状態をデータベースに保存
@@ -116,9 +117,9 @@ class TaskController extends Controller
     /**
      * Todoの詳細表示機能
      */
-    public function show(Request $request)
-    {
-        dd($request->id);
+    public function show(int $id)
+    {  
+
         $todo = todo::find($id);
 
         return view('todos/show', ['todo' => $todo]);

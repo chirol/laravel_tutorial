@@ -14,9 +14,9 @@ class AddUserIdToTodos extends Migration
     public function up()
     {
         Schema::table('todos', function (Blueprint $table) {
-            //$table->integer('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             //外部キーの設定
-            //$table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -28,7 +28,7 @@ class AddUserIdToTodos extends Migration
     public function down()
     {
         Schema::table('todos', function (Blueprint $table) {
-            //$table->dropColumn('user_id');
+            $table->dropColumn('user_id');
             //
         });
     }

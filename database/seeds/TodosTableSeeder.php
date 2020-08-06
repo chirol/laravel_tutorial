@@ -12,6 +12,7 @@ class TodosTableSeeder extends Seeder
      */
     public function run()
     {
+        $user = DB::table('users')->first();
         $titles = ['Todo作成', '進捗チェック', '提出'];
         //
         foreach($titles as $title){
@@ -22,6 +23,7 @@ class TodosTableSeeder extends Seeder
                 'done_flag' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+                'user_id' => $user->id,
 
             ]);
         }
