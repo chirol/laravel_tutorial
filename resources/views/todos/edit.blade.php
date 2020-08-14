@@ -28,7 +28,7 @@
                 <div class="form-group">
                   <label for="done_flag">実施状態</label>
                   <select name="done_flag" id="done_flag" class="form-control">
-                    @foreach(\App\todo::DONE_FLAG as $key => $val)
+                    @foreach(\App\Models\Todo::DONE_FLAG as $key => $val)
                     // oldに値があったらそれを選択済みにする
                       <option
                         value="{{ $key }}"

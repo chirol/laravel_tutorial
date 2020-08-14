@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\todo;
+use App\Models\Todo;
 use Composer\Command\FundCommand;
 
 class User extends Authenticatable
@@ -41,6 +41,6 @@ class User extends Authenticatable
 
     public function todos()
     {
-        return $this->hasMany('App\todo');
+        return $this->hasMany('App\Models\Todo');
     }
 }

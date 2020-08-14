@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\todo;
-use App\User;
+use App\Models\Todo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateTask;
 use App\Http\Requests\EditTask;
@@ -57,7 +57,7 @@ class TaskController extends Controller
     public function create(CreateTask $request){
 
         // モデルのインスタンスを作成
-        $todo = new todo();
+        $todo = new Todo();
 
         // formからバリデーションされた値を受け取りインスタンスにセット
         $todo->title = $request->title;
@@ -78,7 +78,7 @@ class TaskController extends Controller
     public function showEditForm(int $id)
     {
         // 編集対象のtodoモデル呼び出し
-        $todo = todo::find($id);
+        $todo = Todo::find($id);
 
         // 編集テンプレートにモデル情報を渡す
         return view('todos/edit', [
@@ -91,7 +91,7 @@ class TaskController extends Controller
      */
     public function edit(int $id, EditTask $request)
     {
-        $todo = todo::find($id);
+        $todo = Todo::find($id);
 
         $todo->title = $request->title;
         $todo->body = $request->body;
@@ -107,7 +107,7 @@ class TaskController extends Controller
      */
     public function destroy(int $id)
     {
-        $todo = todo::find($id);
+        $todo = Todo::find($id);
 
         $todo->delete();
 
@@ -120,7 +120,7 @@ class TaskController extends Controller
     public function show(int $id)
     {  
 
-        $todo = todo::find($id);
+        $todo = Todo::find($id);
 
         return view('todos/show', ['todo' => $todo]);
     }
