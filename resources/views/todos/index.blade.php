@@ -23,7 +23,7 @@
             </div>
         @endif
         <div class="text-right">
-        <a href="{{ route('create') }}" class="btn btn-default btn-block">
+        <a href="{{ route('todo.create') }}" class="btn btn-default btn-block">
             タスクを追加する
         </a>
         </div>
@@ -41,14 +41,14 @@
         <tbody>
         @foreach($todos as $todo)
             <tr>
-            <td><a href="{{ route('show', ['id' => $todo->id]) }}">{{ $todo->title }}</a></td>
+            <td><a href="{{ route('todo.show', ['todo' => $todo->id]) }}">{{ $todo->title }}</a></td>
             <td>
                 <span class="label {{ $todo->Doneflag_class }}">{{ $todo->doneflag_label }}</span>
             </td>
             <td>{{ $todo->due_date->format('Y/m/d') }}</td> <!--formatが冗長かも-->
-            <td><a class="btn btn-primary" href="{{ route('edit', ['id' => $todo->id]) }}">編集</a></td>
+            <td><a class="btn btn-primary" href="{{ route('todo.edit', ['todo' => $todo->id]) }}">編集</a></td>
             <td>
-                <form action="{{ route('delete', ['id' => $todo->id]) }}" method="post">
+                <form action="{{ route('todo.destroy', ['todo' => $todo->id]) }}" method="post">
                     @csrf
                     @method('DELETE')
                     <input class="btn btn-secondary" type="submit" value="削除">

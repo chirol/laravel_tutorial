@@ -19,8 +19,7 @@
                         @endforeach
                     </div>
                 @endif
-<!-- methodにPOSTを指定しているので、name('create')と紐付けられた複数のURLのうち、POSTで始まるものが適応される -->
-              <form action="{{ route('create') }}" method="post">
+                  <form action="{{ route('todo.store') }}" method="post">
                 @csrf
                 <div class="form-group">
                   <label for="title">タスク名</label>

@@ -32,7 +32,7 @@ class TaskController extends Controller
     /**
      * タスク作成のためのフォームを呼び出す
      */
-    public function showCreateForm(){
+    public function create(){
 
         return view('todos/create');
     }
@@ -54,7 +54,7 @@ class TaskController extends Controller
     /**
      * フォームから受け取った情報をもとにデータベースに書き込む（タスク作成機能）
      */
-    public function create(CreateTask $request){
+    public function store(CreateTask $request){
 
         // モデルのインスタンスを作成
         $todo = new todo();
@@ -69,13 +69,13 @@ class TaskController extends Controller
         // インスタンスの状態をデータベースに保存
         $todo->save();
 
-        return redirect()->route('index');
+        return redirect()->route('todo.index');
     }
 
     /**
      * タスク編集のためのフォームを呼び出す
      */
-    public function showEditForm(int $id)
+    public function edit(int $id)
     {
         // 編集対象のtodoモデル呼び出し
         $todo = todo::find($id);
@@ -89,7 +89,7 @@ class TaskController extends Controller
     /**
      * フォームから受け取った情報をもとにデータベースに書き込む（タスク編集機能）
      */
-    public function edit(int $id, EditTask $request)
+    public function update(int $id, EditTask $request)
     {
         $todo = todo::find($id);
 
@@ -99,7 +99,7 @@ class TaskController extends Controller
         $todo->done_flag = $request->done_flag;
         $todo->save();
 
-        return redirect()->route('index');
+        return redirect()->route('todo.index');
     }
 
     /**
@@ -111,16 +111,16 @@ class TaskController extends Controller
 
         $todo->delete();
 
-        return redirect()->route('index');
+        return redirect()->route('todo.index');
     }
 
     /**
      * Todoの詳細表示機能
      */
-    public function show(int $id)
+    public function show($todo)
     {  
 
-        $todo = todo::find($id);
+        $todo = todo::find($todo);
 
         return view('todos/show', ['todo' => $todo]);
     }

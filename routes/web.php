@@ -12,6 +12,16 @@
 わかったので、一番下に置いている
 */
 Auth::routes();
+
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/', 'TaskController@index');
+    Route::post('/', 'TaskController@search');
+    Route::resource('todo', 'TaskController');
+    
+});
+
+/*
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -24,3 +34,4 @@ Route::group(['middleware' => 'auth'], function() {
     Route::delete('/{id}/delete', 'TaskController@destroy')->name('delete');
     Route::get('/{id}', 'TaskController@show')->name('show');
 });
+*/

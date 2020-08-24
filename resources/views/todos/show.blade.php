@@ -35,8 +35,8 @@
                     <p>{{ $todo->due_date->format('Y/m/d') }}</p>
                 </div>
                 <div>
-                <a class="btn btn-primary" href="{{ route('index')}}">戻る</a>
-                <form action="{{ route('delete', ['id' => $todo->id]) }}" method="post">
+                <a class="btn btn-primary" href="{{ route('todo.index')}}">戻る</a>
+                <form action="{{ route('todo.destroy', ['todo' => $todo->id]) }}" method="post">
                     @csrf
                     @method('DELETE')
                     <input class="btn btn-secondary" type="submit" value="削除">

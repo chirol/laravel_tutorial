@@ -18,8 +18,8 @@
                         @endforeach
                     </div>
                 @endif
-<!-- methodにPOSTを指定しているので、name('edit')と紐付けられた複数のURLのうち、POSTで始まるものが適応される -->
-              <form action="{{ route('edit', ['id' => $todo->id])}}" method="post">
+                  <form action="{{ route('todo.update', ['todo' => $todo->id])}}" method="post">
+                  <input type="hidden" name="_method" value="PUT">
                 @csrf
                 <div class="form-group">
                   <label for="title">タスク名</label>
