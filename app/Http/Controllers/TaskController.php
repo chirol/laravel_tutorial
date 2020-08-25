@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\todo;
-use App\User;
+use App\Models\Todo;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateTask;
-use App\Http\Requests\EditTask;
-use App\Http\Requests\SearchTask;
+use App\Http\Requests\CreateTaskRequest;
+use App\Http\Requests\EditTaskRequest;
+use App\Http\Requests\SearchTaskRequest;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -40,7 +40,7 @@ class TaskController extends Controller
     /**
      * 一覧表示画面での検索機能
      */
-    public function search(SearchTask $request)
+    public function search(SearchTaskRequest $request)
     {
         $search_due_date = $request->search_due_date;
         
@@ -54,10 +54,10 @@ class TaskController extends Controller
     /**
      * フォームから受け取った情報をもとにデータベースに書き込む（タスク作成機能）
      */
-    public function store(CreateTask $request){
+    public function store(CreateTaskRequest $request){
 
         // モデルのインスタンスを作成
-        $todo = new todo();
+        $todo = new Todo();
 
         // formからバリデーションされた値を受け取りインスタンスにセット
         $todo->title = $request->title;
@@ -78,7 +78,7 @@ class TaskController extends Controller
     public function edit(int $id)
     {
         // 編集対象のtodoモデル呼び出し
-        $todo = todo::find($id);
+        $todo = Todo::find($id);
 
         // 編集テンプレートにモデル情報を渡す
         return view('todos/edit', [
@@ -89,9 +89,9 @@ class TaskController extends Controller
     /**
      * フォームから受け取った情報をもとにデータベースに書き込む（タスク編集機能）
      */
-    public function update(int $id, EditTask $request)
+    public function update(int $id, EditTaskRequest $request)
     {
-        $todo = todo::find($id);
+        $todo = Todo::find($id);
 
         $todo->title = $request->title;
         $todo->body = $request->body;
@@ -107,7 +107,7 @@ class TaskController extends Controller
      */
     public function destroy(int $id)
     {
-        $todo = todo::find($id);
+        $todo = Todo::find($id);
 
         $todo->delete();
 
@@ -119,7 +119,6 @@ class TaskController extends Controller
      */
     public function show($todo)
     {  
-
         $todo = todo::find($todo);
 
         return view('todos/show', ['todo' => $todo]);

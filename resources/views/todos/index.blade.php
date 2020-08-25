@@ -43,7 +43,7 @@
             <tr>
             <td><a href="{{ route('todo.show', ['todo' => $todo->id]) }}">{{ $todo->title }}</a></td>
             <td>
-                <span class="label {{ $todo->Doneflag_class }}">{{ $todo->doneflag_label }}</span>
+                <span class="label {{ $todo->doneflag_class }}">{{ $todo->doneflag_label }}</span>
             </td>
             <td>{{ $todo->due_date->format('Y/m/d') }}</td> <!--formatが冗長かも-->
             <td><a class="btn btn-primary" href="{{ route('todo.edit', ['todo' => $todo->id]) }}">編集</a></td>

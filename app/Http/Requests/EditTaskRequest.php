@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\todo;
+use App\Models\Todo;
 
-class EditTask extends CreateTask
+class EditTaskRequest extends CreateTaskRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -17,7 +17,7 @@ class EditTask extends CreateTask
     {
         $rule = parent::rules();
 
-        $done_flag_rule = Rule::in(array_keys(todo::DONE_FLAG));
+        $done_flag_rule = Rule::in(array_keys(Todo::DONE_FLAG));
 
         return $rule + [
             'done_flag' => 'required|' . $done_flag_rule,
@@ -37,10 +37,10 @@ class EditTask extends CreateTask
     {
         $messages = parent::messages();
 
-        // array_mapと無名関数を使ってtodoモデルのDONE_FLAGの'label'の配列を作成
+        // array_mapと無名関数を使ってTodoモデルのDONE_FLAGの'label'の配列を作成
         $status_labels = array_map(function($item){
             return $item['label'];
-        }, todo::DONE_FLAG); 
+        }, Todo::DONE_FLAG); 
 
         $status_labels = implode('、', $status_labels);
 
